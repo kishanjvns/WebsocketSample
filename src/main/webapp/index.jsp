@@ -1,6 +1,6 @@
 <html>
 <head>
-	<script type="text/javascript" src="HelloworldWs.js"></script>
+	<script type="text/javascript" src="HelloworldBinaryStreamWs.js"></script>
 </head>
 <body style="margin: 35px">
 	<h2>Hello World!</h2>
