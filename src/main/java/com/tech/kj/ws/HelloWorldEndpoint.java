@@ -34,11 +34,12 @@ public class HelloWorldEndpoint {
 	}
 
 	@OnMessage
-	public void onMessage(ByteBuffer message, Session session) {
-		System.out.printf("<<<<< Message received. Session id: %s Message: %s%n", session.getId(), message);
+	public void onMessage(ByteBuffer message, Session session) {		
 		try {
-			for (Session session2 : session.getOpenSessions()) {
+			for (Session session2 : allSessions) {
+				System.out.println("length "+allSessions.size());
 				session2.getBasicRemote().sendBinary(message);
+				System.out.printf("<<<<< Message received. Session id: %s Message: %s%n", session2.getId(), message);
 			}
 		} catch (IOException e) {
 			System.err.println("<<<<<<< error \n" + e.getStackTrace());

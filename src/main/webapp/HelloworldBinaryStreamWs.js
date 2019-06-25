@@ -1,25 +1,22 @@
 /**
  * 
  */
-var webSocket = new WebSocket("ws://localhost:8080/WebsocketSample/hello");
+var webSocket = new WebSocket("ws://192.168.0.5:8080/WebsocketSample/hello");
 webSocket.binaryType = "arraybuffer";
 
 function sendMsg() {
 	let textToSend = document.getElementById("messageField").value;
 	let fileToSend = document.getElementById("file").files[0];
 	let msgToSend = null;
-	if ( textToSend !== "") {
-		alert("text send");
+	var divMsg = document.getElementById("msg-box");
+	if ( textToSend !== "") {		
 		msgToSend = textToSend;
 		document.getElementById("messageField").value = "";
-	} else {
-		alert("binary send");
+	} else {		
 		msgToSend = fileToSend;
 	}
-	if (webSocket !== null) {
-		alert("sent "+msgToSend);
-		webSocket.send(msgToSend);
-		divMsg.innerHTML += "<div style='color:red'>" + msgToSend + "</div>";
+	if (webSocket !== null) {		
+		webSocket.send(msgToSend);		
 	} else {
 		alert("Connection lost!!!");
 	}
@@ -59,29 +56,20 @@ webSocket.onmessage = function(evt) {
 }
 
 function onmessage(evt) {
-	alert("received" + evt.data)		
-
-	if(typeof evt.data==="arraybuffer"){
-		alert("arraybuffer");
-	}
-	if (typeof evt.data === "string") {
-		alert("string");
+	if (typeof evt.data === "string") {		
 		drawText(evt.data);
-	} else {
-		alert("binary");
+	} else {		
 		drawBinary(evt.data);
 	}
 }
 function drawText(text) {
-	console.log("received text" + text);
-	/*var json = JSON.parse(text);
-	alert(json);*/
+	console.log("received text" + text);	
 	var divMsg = document.getElementById("msg-box");
 	divMsg.innerHTML += " \n" + text + " <br>";
 }
 
-function drawBinary(message) {
-	console.log("received binary " + Object.prototype.toString.call(bytes));
+function drawBinary(message) {	
+	console.log(String.fromCharCode.apply(null, new Uint16Array(message)));
 	var divMsg = document.getElementById("msg-box");
 	var elem = document.createElement("img");
 	elem.setAttribute("alt", "not available");
