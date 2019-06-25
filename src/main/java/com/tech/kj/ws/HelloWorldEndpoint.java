@@ -46,6 +46,7 @@ public class HelloWorldEndpoint {
 	}
 
 	
+	
 	@OnMessage
 	public void onMessage(String message, Session session) {
 		System.out.printf("<<<<< Message received. Session id: %s Message: %s%n", session.getId(), message);
@@ -57,6 +58,7 @@ public class HelloWorldEndpoint {
 			System.err.println("<<<<<<< error \n" + e.getStackTrace());
 		}
 	}
+	 
 	 
 
 	@OnError

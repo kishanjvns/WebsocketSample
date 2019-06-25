@@ -21,17 +21,20 @@ public class HelloWorldTextEncoderDecoder implements Encoder.Text<String>,Decode
 
 	@Override
 	public String encode(String object) throws EncodeException {
+		System.out.println("MessageEncoder - encode method called");
 		return object;
 	}
 //end encoder
 
 	@Override
 	public String decode(String s) throws DecodeException {		
+		System.out.println("MessageEncoder - decode method called");
 		return s;
 	}
 
 	@Override
-	public boolean willDecode(String s) {		
+	public boolean willDecode(String s) {	
+		System.out.println("MessageEncoder - willDecode method called");
 		return true;
 	}
 	

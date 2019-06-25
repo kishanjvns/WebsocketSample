@@ -1,5 +1,6 @@
 package com.tech.kj.ws;
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 import javax.websocket.DecodeException;
@@ -12,32 +13,33 @@ public class HelloWorldBinaryEncoderDecoder implements Encoder.Binary<byte[]>,De
 //encoder
 	@Override
 	public void init(EndpointConfig config) {
-		// TODO Auto-generated method stub
+		System.out.println("Binary MessageEncoder - init method called");
 		
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
+		System.out.println("Binary MessageEncoder - destroy method called");	
 		
 	}
 
 	@Override
 	public ByteBuffer encode(byte[] object) throws EncodeException {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Binary MessageEncoder - encode method called");
+		ByteBuffer buffer=ByteBuffer.wrap(object, 0, object.length);		
+		return buffer;
 	}
 	//end encoder
 
 	@Override
 	public byte[] decode(ByteBuffer bytes) throws DecodeException {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Binary MessageEncoder - decode method called");
+		return bytes.array();		
 	}
 
 	@Override
 	public boolean willDecode(ByteBuffer bytes) {
-		// TODO Auto-generated method stub
+		System.out.println("Binary MessageEncoder - willDecode method called");
 		return true;
 	}
 	

@@ -7,14 +7,17 @@ webSocket.binaryType = "arraybuffer";
 function sendMsg() {
 	let textToSend = document.getElementById("messageField").value;
 	let fileToSend = document.getElementById("file").files[0];
-	let msgToSend = "";
-	if (textToSend !== null || textToSend !== "") {
+	let msgToSend = null;
+	if ( textToSend !== "") {
+		alert("text send");
 		msgToSend = textToSend;
 		document.getElementById("messageField").value = "";
 	} else {
+		alert("binary send");
 		msgToSend = fileToSend;
 	}
 	if (webSocket !== null) {
+		alert("sent "+msgToSend);
 		webSocket.send(msgToSend);
 		divMsg.innerHTML += "<div style='color:red'>" + msgToSend + "</div>";
 	} else {
@@ -56,8 +59,7 @@ webSocket.onmessage = function(evt) {
 }
 
 function onmessage(evt) {
-	alert("received" + evt.data.data)	
-	alert(typeof evt.data === String);
+	alert("received" + evt.data)		
 
 	if(typeof evt.data==="arraybuffer"){
 		alert("arraybuffer");
@@ -71,15 +73,15 @@ function onmessage(evt) {
 	}
 }
 function drawText(text) {
-	console.log("sending text" + json);
-	var json = JSON.parse(text);
-	alert(json);
+	console.log("received text" + text);
+	/*var json = JSON.parse(text);
+	alert(json);*/
 	var divMsg = document.getElementById("msg-box");
-	divMsg.innerHTML += " \n" + message.data + " <br>";
+	divMsg.innerHTML += " \n" + text + " <br>";
 }
 
 function drawBinary(message) {
-	console.log("send binary " + Object.prototype.toString.call(bytes));
+	console.log("received binary " + Object.prototype.toString.call(bytes));
 	var divMsg = document.getElementById("msg-box");
 	var elem = document.createElement("img");
 	elem.setAttribute("alt", "not available");
